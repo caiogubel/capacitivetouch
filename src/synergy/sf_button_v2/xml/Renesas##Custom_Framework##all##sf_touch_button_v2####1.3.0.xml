@@ -9,6 +9,10 @@
         <property default="1" display="Max. Open Button Count" id="config.framework.sf_touch_button_v2.max_count">
             <constraint display="Value must be in range (1-36)">testInteger("${config.framework.sf_touch_button_v2.max_count}")  &amp;&amp; ("${config.framework.sf_touch_button_v2.max_count}" &gt;= 0) &amp;&amp; ("${config.framework.sf_touch_button_v2.max_count}" &lt; 36)</constraint>
         </property>
+        <property default="config.framework.sf_touch_button_v2.auto_init.enabled" display="Open upon initialization" id="config.framework.sf_touch_button_v2.auto_init">
+            <option display="Enabled" id="config.framework.sf_touch_button_v2.auto_init.enabled" value="1"/>
+            <option display="Disabled" id="config.framework.sf_touch_button_v2.auto_init.disabled" value="0"/>
+        </property>
     <content>
         /**
          * Specify whether to include code for API parameter checking. Valid settings include:
@@ -22,6 +26,13 @@
          */
          #define BUTTON_CFG_MAX_CONTROL_BLOCK_COUNT     (${config.framework.sf_touch_button_v2.max_count})
          
+         /**
+         * Specify whether to include code to open button on initialization. Valid settings include:
+         *    - 1 : Includes parameter checking
+         *    - 0 : Compiles out parameter checking
+         */
+         #define BUTTON_CFG_OPEN_ON_INIT         (${config.framework.sf_touch_button_v2.auto_init})
+         
     </content>
     </config>
     <module config="config.framework.sf_touch_button_v2" display="Framework|Input|${module.framework.sf_touch_button.name} Capacitive Touch Button on sf_touch_button_v2" id="module.framework.sf_touch_button_v2" common="100" version="1">
@@ -33,7 +44,7 @@
         <requires id="module.framework.sf_touch_button.requires.ctsu_sensor" interface="interface.driver.ctsu_sensor" display="Add Capacitive Touch Sensor"/>
         
         <provides interface="interface.framework.sf_touch_button" />
-        <provides interface="interface.framework.sf_touch_button" />
+        <provides interface="interface.framework.sf_touch_button_on_sf_touch_button" />
         <provides interface="interface.framework.sf_touch_button.${module.framework.sf_touch_button.name}" />
         
         <property default="g_touch_button${_instance}" display="Name" id="module.framework.sf_touch_button.name">
@@ -99,6 +110,7 @@
 
         </declarations>
         <init>
+        #if (BUTTON_CFG_OPEN_ON_INIT==1)
         {
             /* Open the ${module.framework.sf_touch_button.name} button Instance */
             touch_button_err_t err = ${module.framework.sf_touch_button.name}.p_api->open(${module.framework.sf_touch_button.name}.p_ctrl, ${module.framework.sf_touch_button.name}.p_cfg);
@@ -106,6 +118,7 @@
             /* Wait here if open fails */
             while(TOUCH_BUTTON_SUCCESS!=err);
         }
+        #endif /* (BUTTON_CFG_OPEN_ON_INIT==1) */
         </init>
     </module>
     <!-- Touch Button XML END here-->

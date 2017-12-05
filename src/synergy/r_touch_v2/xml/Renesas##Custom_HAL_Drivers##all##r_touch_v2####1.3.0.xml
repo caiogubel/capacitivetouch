@@ -101,6 +101,9 @@
         </content>
     </config>
     <module config="config.driver.touch_v2" display="Driver|Input|${module.driver.touch.name} TOUCH V2 Driver on r_touch_v2" id="module.driver.touch_on_touch" common="100" version="1">
+         <constraint display="Unique name required for each instance">
+            "${interface.driver.touch.${module.driver.touch.name}}" === "1"
+        </constraint>
         <requires id="module.driver.touch.requires.ctsu" interface="interface.driver.ctsu_v2" display="Add CTSU HAL Driver">
             <override property="module.driver.ctsu.p_callback" value= "NULL"/>
         </requires>
@@ -132,11 +135,11 @@
         /** CTSU SFRs common to all sensors (in a configuration) */
         extern uint64_t ${module.driver.touch.p_binary_result};
 
-	    #ifndef ${module.driver.touch.p_callback}
-	            void ${module.driver.touch.p_callback}(touch_callback_arg_t * p_args);
-	    #endif
-		#endif /* (DATA_SOURCE == DATA_SOURCE_SSPCONFIG) */
-		
+        #ifndef ${module.driver.touch.p_callback}
+                void ${module.driver.touch.p_callback}(touch_callback_arg_t * p_args);
+        #endif
+        #endif /* (DATA_SOURCE == DATA_SOURCE_SSPCONFIG) */
+        
         extern touch_instance_t const ${module.driver.touch.name};
         
         </header>

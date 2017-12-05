@@ -1322,8 +1322,8 @@
             <option display="1MHz" id="module.driver.ctsu_sensor.freq.1MHz" value="1000000"/>
             <option display="500kHz" id="module.driver.ctsu_sensor.freq.500kHz" value="500000"/>
         </property> -->
-        <property default="module.driver.ctsu_sensor.rx.none" display="Receive Channel (required)" id="module.driver.ctsu_sensor.rx">
-            <option display="None" id="module.driver.ctsu_sensor.rx.none" value="37"/>
+        <property default="module.driver.ctsu_sensor.rx.none" display="Receive Electrode (required)" id="module.driver.ctsu_sensor.rx">
+            <option display="None" id="module.driver.ctsu_sensor.rx.none" value="255"/>
             <option display="TS-00" id="module.driver.ctsu_sensor.rx.00" value="0"/>
             <option display="TS-01" id="module.driver.ctsu_sensor.rx.01" value="1"/>
             <option display="TS-02" id="module.driver.ctsu_sensor.rx.02" value="2"/>
@@ -1362,8 +1362,8 @@
             <option display="TS-35" id="module.driver.ctsu_sensor.rx.35" value="35"/>
             <option display="TS-36" id="module.driver.ctsu_sensor.rx.36" value="36"/>
         </property>
-        <property default="module.driver.ctsu_sensor.tx.none" display="Transmit Channel" id="module.driver.ctsu_sensor.tx">
-            <option display="None" id="module.driver.ctsu_sensor.rx.none" value="37"/>
+        <property default="module.driver.ctsu_sensor.tx.none" display="Transmit Electrode" id="module.driver.ctsu_sensor.tx">
+            <option display="None" id="module.driver.ctsu_sensor.rx.none" value="255"/>
             <option display="TS-00" id="module.driver.ctsu_sensor.tx.00" value="0"/>
             <option display="TS-01" id="module.driver.ctsu_sensor.tx.01" value="1"/>
             <option display="TS-02" id="module.driver.ctsu_sensor.tx.02" value="2"/>
