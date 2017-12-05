@@ -108,7 +108,7 @@ touch_button_instance_t const %(name)s =
       <property id=\"module.framework.sf_touch_button.name\" value=\"%(name)s\"/>
       <property id=\"module.framework.sf_touch_button.press_enable\" value=\"module.framework.sf_touch_button.press_enable.enabled\"/>
       <property id=\"module.framework.sf_touch_button.release_enable\" value=\"module.framework.sf_touch_button.release_enable.enabled\"/>
-      <property id=\"module.framework.sf_touch_button.debounce\" value=\"1\"/>
+      <!--<property id=\"module.framework.sf_touch_button.debounce\" value=\"1\"/>-->
       <property id=\"module.framework.sf_touch_button.p_callback\" value=\"touch_button_common_callback\"/>
     </module>
     <context id=\"_context.%(crand)d\">
