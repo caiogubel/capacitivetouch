@@ -128,15 +128,15 @@
             <option display="Divide by 4" id="module.driver.ctsu.pclkb_div.div_4" value="2"/>
         </property>
         
-        <property default="module.driver.ctsu.mode.mutual0" display="Measurement Method" id="module.driver.ctsu.mode">
-            <option display="Mutual Capacitance (id MUTUAL0)" id="module.driver.ctsu.mode.mutual0" value="MUTUAL0"/>
-            <option display="Mutual Capacitance (id MUTUAL1)" id="module.driver.ctsu.mode.mutual1" value="MUTUAL1"/>
-            <option display="Mutual Capacitance (id MUTUAL2)" id="module.driver.ctsu.mode.mutual2" value="MUTUAL2"/>
-            <option display="Mutual Capacitance (id MUTUAL3)" id="module.driver.ctsu.mode.mutual3" value="MUTUAL3"/>
-            <option display="Mutual Capacitance (id MUTUAL4)" id="module.driver.ctsu.mode.mutual4" value="MUTUAL4"/>
-            <option display="Mutual Capacitance (id MUTUAL5)" id="module.driver.ctsu.mode.mutual5" value="MUTUAL5"/>
-            <option display="Mutual Capacitance (id MUTUAL6)" id="module.driver.ctsu.mode.mutual6" value="MUTUAL6"/>
-            <option display="Mutual Capacitance (id MUTUAL7)" id="module.driver.ctsu.mode.mutual7" value="MUTUAL7"/>
+        <property default="module.driver.ctsu.mode.self" display="Measurement Method" id="module.driver.ctsu.mode">
+            <!--<option display="Mutual Capacitance (id MUTUAL0)" id="module.driver.ctsu.mode.mutual0" value="MUTUAL0"/>-->
+            <!--<option display="Mutual Capacitance (id MUTUAL1)" id="module.driver.ctsu.mode.mutual1" value="MUTUAL1"/>-->
+            <!--<option display="Mutual Capacitance (id MUTUAL2)" id="module.driver.ctsu.mode.mutual2" value="MUTUAL2"/>-->
+            <!--<option display="Mutual Capacitance (id MUTUAL3)" id="module.driver.ctsu.mode.mutual3" value="MUTUAL3"/>-->
+            <!--<option display="Mutual Capacitance (id MUTUAL4)" id="module.driver.ctsu.mode.mutual4" value="MUTUAL4"/>-->
+            <!--<option display="Mutual Capacitance (id MUTUAL5)" id="module.driver.ctsu.mode.mutual5" value="MUTUAL5"/>-->
+            <!--<option display="Mutual Capacitance (id MUTUAL6)" id="module.driver.ctsu.mode.mutual6" value="MUTUAL6"/>-->
+            <!--<option display="Mutual Capacitance (id MUTUAL7)" id="module.driver.ctsu.mode.mutual7" value="MUTUAL7"/>-->
             <option display="Self Capacitance (id SELF)" id="module.driver.ctsu.mode.self" value="SELF"/>
         </property> 
         
@@ -175,182 +175,182 @@
         <property default="module.driver.ctsu.ts00.unused" display="TS00 Pin Mode" id="module.driver.ctsu.ts00">
             <option display="Not Used" id="module.driver.ctsu.ts00.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts00.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts00.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts00.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts01.unused" display="TS01 Pin Mode" id="module.driver.ctsu.ts01">
             <option display="Not Used" id="module.driver.ctsu.ts01.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts01.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts01.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts01.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts02.unused" display="TS02 Pin Mode" id="module.driver.ctsu.ts02">
             <option display="Not Used" id="module.driver.ctsu.ts02.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts02.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts02.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts02.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts03.unused" display="TS03 Pin Mode" id="module.driver.ctsu.ts03">
             <option display="Not Used" id="module.driver.ctsu.ts03.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts03.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts03.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts03.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts04.unused" display="TS04 Pin Mode" id="module.driver.ctsu.ts04">
             <option display="Not Used" id="module.driver.ctsu.ts04.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts04.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts04.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts04.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts05.unused" display="TS05 Pin Mode" id="module.driver.ctsu.ts05">
             <option display="Not Used" id="module.driver.ctsu.ts05.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts05.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts05.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts05.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts06.unused" display="TS06 Pin Mode" id="module.driver.ctsu.ts06">
             <option display="Not Used" id="module.driver.ctsu.ts06.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts06.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts06.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts06.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts07.unused" display="TS07 Pin Mode" id="module.driver.ctsu.ts07">
             <option display="Not Used" id="module.driver.ctsu.ts07.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts07.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts07.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts07.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts08.unused" display="TS08 Pin Mode" id="module.driver.ctsu.ts08">
             <option display="Not Used" id="module.driver.ctsu.ts08.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts08.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts08.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts08.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts09.unused" display="TS09 Pin Mode" id="module.driver.ctsu.ts09">
             <option display="Not Used" id="module.driver.ctsu.ts09.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts09.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts09.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts09.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts10.unused" display="TS10 Pin Mode" id="module.driver.ctsu.ts10">
             <option display="Not Used" id="module.driver.ctsu.ts10.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts10.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts10.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts10.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts11.unused" display="TS11 Pin Mode" id="module.driver.ctsu.ts11">
             <option display="Not Used" id="module.driver.ctsu.ts11.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts11.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts11.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts11.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts12.unused" display="TS12 Pin Mode" id="module.driver.ctsu.ts12">
             <option display="Not Used" id="module.driver.ctsu.ts12.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts12.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts12.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts12.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts13.unused" display="TS13 Pin Mode" id="module.driver.ctsu.ts13">
             <option display="Not Used" id="module.driver.ctsu.ts13.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts13.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts13.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts13.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts14.unused" display="TS14 Pin Mode" id="module.driver.ctsu.ts14">
             <option display="Not Used" id="module.driver.ctsu.ts14.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts14.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts14.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts14.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts15.unused" display="TS15 Pin Mode" id="module.driver.ctsu.ts15">
             <option display="Not Used" id="module.driver.ctsu.ts15.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts15.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts15.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts15.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts16.unused" display="TS16 Pin Mode" id="module.driver.ctsu.ts16">
             <option display="Not Used" id="module.driver.ctsu.ts16.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts16.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts16.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts16.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts17.unused" display="TS17 Pin Mode" id="module.driver.ctsu.ts17">
             <option display="Not Used" id="module.driver.ctsu.ts17.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts17.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts17.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts17.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts18.unused" display="TS18 Pin Mode" id="module.driver.ctsu.ts18">
             <option display="Not Used" id="module.driver.ctsu.ts18.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts18.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts18.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts18.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts19.unused" display="TS19 Pin Mode" id="module.driver.ctsu.ts19">
             <option display="Not Used" id="module.driver.ctsu.ts19.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts19.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts19.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts19.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts20.unused" display="TS20 Pin Mode" id="module.driver.ctsu.ts20">
             <option display="Not Used" id="module.driver.ctsu.ts20.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts20.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts20.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts20.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts21.unused" display="TS21 Pin Mode" id="module.driver.ctsu.ts21">
             <option display="Not Used" id="module.driver.ctsu.ts21.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts21.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts21.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts21.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts22.unused" display="TS22 Pin Mode" id="module.driver.ctsu.ts22">
             <option display="Not Used" id="module.driver.ctsu.ts22.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts22.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts22.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts22.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts23.unused" display="TS23 Pin Mode" id="module.driver.ctsu.ts23">
             <option display="Not Used" id="module.driver.ctsu.ts23.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts23.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts23.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts23.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts24.unused" display="TS24 Pin Mode" id="module.driver.ctsu.ts24">
             <option display="Not Used" id="module.driver.ctsu.ts24.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts24.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts24.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts24.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts25.unused" display="TS25 Pin Mode" id="module.driver.ctsu.ts25">
             <option display="Not Used" id="module.driver.ctsu.ts25.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts25.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts25.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts25.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts26.unused" display="TS26 Pin Mode" id="module.driver.ctsu.ts26">
             <option display="Not Used" id="module.driver.ctsu.ts26.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts26.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts26.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts26.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts27.unused" display="TS27 Pin Mode" id="module.driver.ctsu.ts27">
             <option display="Not Used" id="module.driver.ctsu.ts27.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts27.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts27.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts27.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts28.unused" display="TS28 Pin Mode" id="module.driver.ctsu.ts28">
             <option display="Not Used" id="module.driver.ctsu.ts28.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts28.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts28.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts28.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts29.unused" display="TS29 Pin Mode" id="module.driver.ctsu.ts29">
             <option display="Not Used" id="module.driver.ctsu.ts29.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts29.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts29.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts29.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts30.unused" display="TS30 Pin Mode" id="module.driver.ctsu.ts30">
             <option display="Not Used" id="module.driver.ctsu.ts30.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts30.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts30.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts30.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts31.unused" display="TS31 Pin Mode" id="module.driver.ctsu.ts31">
             <option display="Not Used" id="module.driver.ctsu.ts31.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts31.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts31.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts31.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts32.unused" display="TS32 Pin Mode" id="module.driver.ctsu.ts32">
             <option display="Not Used" id="module.driver.ctsu.ts32.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts32.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts32.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts32.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts33.unused" display="TS33 Pin Mode" id="module.driver.ctsu.ts33">
             <option display="Not Used" id="module.driver.ctsu.ts33.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts33.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts33.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts33.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts34.unused" display="TS34 Pin Mode" id="module.driver.ctsu.ts34">
             <option display="Not Used" id="module.driver.ctsu.ts34.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts34.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts34.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts34.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         <property default="module.driver.ctsu.ts35.unused" display="TS35 Pin Mode" id="module.driver.ctsu.ts35">
             <option display="Not Used" id="module.driver.ctsu.ts35.unused" value="TS_MODE_UNUSED"/>
             <option display="Receive" id="module.driver.ctsu.ts35.receive" value="TS_MODE_RECEIVE"/>
-            <option display="Transmit" id="module.driver.ctsu.ts35.transmit" value="TS_MODE_TRANSMIT"/>
+            <!--<option display="Transmit" id="module.driver.ctsu.ts35.transmit" value="TS_MODE_TRANSMIT"/>-->
         </property>
         
         <property default="module.driver.ctsu.sep1.none" display=" " id="module.driver.ctsu.sep1">
@@ -1362,45 +1362,45 @@
             <option display="TS-35" id="module.driver.ctsu_sensor.rx.35" value="35"/>
             <option display="TS-36" id="module.driver.ctsu_sensor.rx.36" value="36"/>
         </property>
-        <property default="module.driver.ctsu_sensor.tx.none" display="Transmit Electrode" id="module.driver.ctsu_sensor.tx">
+        <property default="module.driver.ctsu_sensor.tx.none" display="Transmit Electrode(Mutual Capacitance only)" id="module.driver.ctsu_sensor.tx">
             <option display="None" id="module.driver.ctsu_sensor.rx.none" value="255"/>
-            <option display="TS-00" id="module.driver.ctsu_sensor.tx.00" value="0"/>
-            <option display="TS-01" id="module.driver.ctsu_sensor.tx.01" value="1"/>
-            <option display="TS-02" id="module.driver.ctsu_sensor.tx.02" value="2"/>
-            <option display="TS-03" id="module.driver.ctsu_sensor.tx.03" value="3"/>
-            <option display="TS-04" id="module.driver.ctsu_sensor.tx.04" value="4"/>
-            <option display="TS-05" id="module.driver.ctsu_sensor.tx.05" value="5"/>
-            <option display="TS-06" id="module.driver.ctsu_sensor.tx.06" value="6"/>
-            <option display="TS-07" id="module.driver.ctsu_sensor.tx.07" value="7"/>
-            <option display="TS-08" id="module.driver.ctsu_sensor.tx.08" value="8"/>
-            <option display="TS-09" id="module.driver.ctsu_sensor.tx.09" value="9"/>
-            <option display="TS-10" id="module.driver.ctsu_sensor.tx.10" value="10"/>
-            <option display="TS-11" id="module.driver.ctsu_sensor.tx.11" value="11"/>
-            <option display="TS-12" id="module.driver.ctsu_sensor.tx.12" value="12"/>
-            <option display="TS-13" id="module.driver.ctsu_sensor.tx.13" value="13"/>
-            <option display="TS-14" id="module.driver.ctsu_sensor.tx.14" value="14"/>
-            <option display="TS-15" id="module.driver.ctsu_sensor.tx.15" value="15"/>
-            <option display="TS-16" id="module.driver.ctsu_sensor.tx.16" value="16"/>
-            <option display="TS-17" id="module.driver.ctsu_sensor.tx.17" value="17"/>
-            <option display="TS-18" id="module.driver.ctsu_sensor.tx.18" value="18"/>
-            <option display="TS-19" id="module.driver.ctsu_sensor.tx.19" value="19"/>
-            <option display="TS-20" id="module.driver.ctsu_sensor.tx.20" value="20"/>
-            <option display="TS-21" id="module.driver.ctsu_sensor.tx.21" value="21"/>
-            <option display="TS-22" id="module.driver.ctsu_sensor.tx.22" value="22"/>
-            <option display="TS-23" id="module.driver.ctsu_sensor.tx.23" value="23"/>
-            <option display="TS-24" id="module.driver.ctsu_sensor.tx.24" value="24"/>
-            <option display="TS-25" id="module.driver.ctsu_sensor.tx.25" value="25"/>
-            <option display="TS-26" id="module.driver.ctsu_sensor.tx.26" value="26"/>
-            <option display="TS-27" id="module.driver.ctsu_sensor.tx.27" value="27"/>
-            <option display="TS-28" id="module.driver.ctsu_sensor.tx.28" value="28"/>
-            <option display="TS-29" id="module.driver.ctsu_sensor.tx.29" value="29"/>
-            <option display="TS-30" id="module.driver.ctsu_sensor.tx.30" value="30"/>
-            <option display="TS-31" id="module.driver.ctsu_sensor.tx.31" value="31"/>
-            <option display="TS-32" id="module.driver.ctsu_sensor.tx.32" value="32"/>
-            <option display="TS-33" id="module.driver.ctsu_sensor.tx.33" value="33"/>
-            <option display="TS-34" id="module.driver.ctsu_sensor.tx.34" value="34"/>
-            <option display="TS-35" id="module.driver.ctsu_sensor.tx.35" value="35"/>
-            <option display="TS-36" id="module.driver.ctsu_sensor.tx.36" value="36"/>
+            <!--<option display="TS-00" id="module.driver.ctsu_sensor.tx.00" value="0"/> -->
+            <!--<option display="TS-01" id="module.driver.ctsu_sensor.tx.01" value="1"/> -->
+            <!--<option display="TS-02" id="module.driver.ctsu_sensor.tx.02" value="2"/> -->
+            <!--<option display="TS-03" id="module.driver.ctsu_sensor.tx.03" value="3"/> -->
+            <!--<option display="TS-04" id="module.driver.ctsu_sensor.tx.04" value="4"/> -->
+            <!--<option display="TS-05" id="module.driver.ctsu_sensor.tx.05" value="5"/> -->
+            <!--<option display="TS-06" id="module.driver.ctsu_sensor.tx.06" value="6"/> -->
+            <!--<option display="TS-07" id="module.driver.ctsu_sensor.tx.07" value="7"/> -->
+            <!--<option display="TS-08" id="module.driver.ctsu_sensor.tx.08" value="8"/> -->
+            <!--<option display="TS-09" id="module.driver.ctsu_sensor.tx.09" value="9"/> -->
+            <!--<option display="TS-10" id="module.driver.ctsu_sensor.tx.10" value="10"/>-->
+            <!--<option display="TS-11" id="module.driver.ctsu_sensor.tx.11" value="11"/>-->
+            <!--<option display="TS-12" id="module.driver.ctsu_sensor.tx.12" value="12"/>-->
+            <!--<option display="TS-13" id="module.driver.ctsu_sensor.tx.13" value="13"/>-->
+            <!--<option display="TS-14" id="module.driver.ctsu_sensor.tx.14" value="14"/>-->
+            <!--<option display="TS-15" id="module.driver.ctsu_sensor.tx.15" value="15"/>-->
+            <!--<option display="TS-16" id="module.driver.ctsu_sensor.tx.16" value="16"/>-->
+            <!--<option display="TS-17" id="module.driver.ctsu_sensor.tx.17" value="17"/>-->
+            <!--<option display="TS-18" id="module.driver.ctsu_sensor.tx.18" value="18"/>-->
+            <!--<option display="TS-19" id="module.driver.ctsu_sensor.tx.19" value="19"/>-->
+            <!--<option display="TS-20" id="module.driver.ctsu_sensor.tx.20" value="20"/>-->
+            <!--<option display="TS-21" id="module.driver.ctsu_sensor.tx.21" value="21"/>-->
+            <!--<option display="TS-22" id="module.driver.ctsu_sensor.tx.22" value="22"/>-->
+            <!--<option display="TS-23" id="module.driver.ctsu_sensor.tx.23" value="23"/>-->
+            <!--<option display="TS-24" id="module.driver.ctsu_sensor.tx.24" value="24"/>-->
+            <!--<option display="TS-25" id="module.driver.ctsu_sensor.tx.25" value="25"/>-->
+            <!--<option display="TS-26" id="module.driver.ctsu_sensor.tx.26" value="26"/>-->
+            <!--<option display="TS-27" id="module.driver.ctsu_sensor.tx.27" value="27"/>-->
+            <!--<option display="TS-28" id="module.driver.ctsu_sensor.tx.28" value="28"/>-->
+            <!--<option display="TS-29" id="module.driver.ctsu_sensor.tx.29" value="29"/>-->
+            <!--<option display="TS-30" id="module.driver.ctsu_sensor.tx.30" value="30"/>-->
+            <!--<option display="TS-31" id="module.driver.ctsu_sensor.tx.31" value="31"/>-->
+            <!--<option display="TS-32" id="module.driver.ctsu_sensor.tx.32" value="32"/>-->
+            <!--<option display="TS-33" id="module.driver.ctsu_sensor.tx.33" value="33"/>-->
+            <!--<option display="TS-34" id="module.driver.ctsu_sensor.tx.34" value="34"/>-->
+            <!--<option display="TS-35" id="module.driver.ctsu_sensor.tx.35" value="35"/>-->
+            <!--<option display="TS-36" id="module.driver.ctsu_sensor.tx.36" value="36"/>-->
         </property>
         <property default="0" display="Spectrum Diffusion Setting (CTSUSSDIV)" id="module.driver.ctsu_sensor.ctsussdiv">
             <constraint display="Value must be in range (0-16)">testInteger("${module.driver.ctsu_sensor.ctsussdiv}")  &amp;&amp; ("${module.driver.ctsu_sensor.ctsussdiv}" &gt;= 0) &amp;&amp; ("${module.driver.ctsu_sensor.ctsussdiv}" &lt; 16)</constraint>
