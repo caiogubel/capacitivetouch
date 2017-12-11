@@ -10,10 +10,14 @@ cover-image:
 ...
 
 # Introduction #
-This application note is designed to educate a user on using the capacitive touch sensors available with the DK-S124. The following sections will 
-describe how to configure, calibrate and operate the Capacitive Touch Sensing Unit hardware on-board the microcontroller to measure changing capacitance. 
+This application note is designed to educate a user on using the capacitive touch sensors available with the DK-S124. Chapter 1 in this document 
+describes how to configure, calibrate and operate the Capacitive Touch Sensing Unit hardware on-board the microcontroller to measure changing capacitance. 
 When the CTSU is capable of measurements, the Touch Detection Middle-ware is introduced to monitor the measurements and indicate when a user input (due to close
 proximity) to a touch sensor occurs.
+
+Chapter 2 discusses how a user can connect a functional Touch Detection system to a PC and observe operation
+
+Chapter 3 Discusses how a user can tune a configured system using external PC tool.
 
 ## Equipment ##
 The following hardware and software is needed to evaluate this application note. Installation procedure for the software items below is available in the appendix 
@@ -23,6 +27,7 @@ and must be completed prior to evaluating further sections.
 - [Synergy Software Package v1.3.0+](https://synergygallery.renesas.com)
 - [Renesas.r_ctsu_v2.1.3.0.pack](./deploy/Renesas.r_ctsu_v2.1.3.0.pack)
 - [Renesas.r_touch_v2.1.3.0.pack](./deploy/Renesas.r_touch_v2.1.3.0.pack)
+- [Renesas.sf_ctsu_tuning.1.3.0.pack](./deploy/Renesas.sf_ctsu_tuning.1.3.0.pack)
 
 # DK-S124 #
 The S124 Development Kit (DK-S124) allows users to evaluate the Synergy S124 Microcontroller and enables them to develop their own applications. One of the features
@@ -38,7 +43,10 @@ The SSP supports the DK-S124. As a result, when using the DK-S124; you should be
 
 ![A BSP using the DK-S124](./images/NPD_DKS124.PNG)
 
-Follow the procedure in the appendix to create a new Synergy C Project (for the DK-S124) with just the Board Support Package.
+Chapter 1
+==========
+
+Follow the procedure in the appendix to create a new Synergy C Project (for the DK-S124) with just the Board Support Package and verify if the project builds.
 
 # Configuring the Capacitive Touch Sensing Unit #
 To properly set up the capacitive touch sensing unit the following steps must be followed:
@@ -294,6 +302,7 @@ Use the SSP Configurator to change the parameters for each Capacitive Touch Sens
 Replace the previous code in `${ProjName}\src\hal_entry.c` with snippet below.
 
 ```c
+
 void hal_entry(void)
 {
 	extern void initialise_monitor_handles(void);
@@ -338,10 +347,104 @@ void touch_callback(touch_callback_arg_t * p_arg)
 }
 ```
 
-## Observing Touch Detection ##
+## Observing Touch Detection in e2studio ##
 - Copy the name of the Binary result buffer (g_touch0_binary) from the g_touch0 TOUCH V2 Driver on r_touch_v2.
 - Add `g_touch0_binary` to the Expressions tab and enable Real-time Refresh.
 - Touch the sensors on the DK-S124 and observe the binary changing values.
+
+Chapter 2
+==========
+Once a TOUCH detection interface/middleware is operational, a user may want to visually observe the operation to understand 
+what capacitance measurement data is being generated in the given environment. The Renesas.sf_ctsu_tuning.1.3.0.pack file facilitates this 
+capability. It allows a user to connect to a PC based Monitoring and Tuning tool called Workbench6. To maintain consistency, with the previous chapter this example adds the stack
+to the HAL/Common Thread. To be able to communicate with the PC; a user must configure a communication interface. This can be done by either using the **Communication Framework** or 
+the **SCI UART HAL Drivers** available with the SSP. Once the stacks for the communication interface are configured and tested to be functional, you may configure the Tuning Framework to utilize the interface.
+
+## Configuring the Tuning Framework ##
+
+The following steps must be performed to allow connectivity to the host PC running the tool:
+
+- Copy the pack file to the e2studio installation folder. The default path is `C:\Renesas\e2_studio\internal\projectgen\arm\Packs`.
+- Open an existing project with a functional Capacitive TOUCH detection interface.
+- Add the **CTSU Tuning Framework on sf_ctsu_tuning** stack to a New Thread or the HAL/Common stack. 
+- Provide the CTSU and TOUCH Middle-ware the Framework will be monitoring. **Note that currently monitoring only one CTSU/TOUCH interface is supported.**
+- Provide the Symbolic name of the Communication Stack to the Tuning Framework. 
+
+The following figure shows an example of using a USB Communications Framework with the Tuning Framework. It is important to observe that the names must match as highlighted and the PC connection interface specifies
+the intent to use Communication Frameworks.
+
+![USB Communications Framework used with the Tuning Framework](./images/TuningStackUSB.PNG)
+
+The following figure shows an example of using a Serial Communication driver with the Tuning Framework. Again, it is important to observe that the names must match as highlighted and the PC connection interface specifies
+the intent to use a HAL Driver.
+
+![SCI UART HAL used with the Tuning Framework](./images/TuningStackSCI.PNG)
+
+## Operating the Tuning Framework ## 
+
+Once the Tuning Framework is properly configured:
+
+- Call the open function once to perform initialization. Note, **the Tuning Framework will not operate the lower layers in Monitor mode**.
+- Call the run function in a loop to ensure exchange of data with the connected PC.
+
+The following code demonstrates the TOUCH middleware (which also operates the underlying CTSU HAL) operating with the Tuning Framework when using the Communications Frameworks.
+
+```c
+
+{
+
+    g_sf_ctsu_tuning0.p_api->open(g_sf_ctsu_tuning0.p_ctrl, g_sf_ctsu_tuning0.p_cfg);
+
+#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    g_touch0_on_g_ctsu.p_api->open(g_touch0_on_g_ctsu.p_ctrl, g_touch0_on_g_ctsu.p_cfg);
+
+    g_touch0_on_g_ctsu.p_api->calibrate(g_touch0_on_g_ctsu.p_ctrl);
+#endif
+
+    while (1)
+    {
+        g_sf_ctsu_tuning0.p_api->run(g_sf_ctsu_tuning0.p_ctrl);
+#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+        if (g_touch0_on_g_ctsu.p_api->update (g_touch0_on_g_ctsu.p_ctrl) == TOUCH_SUCCESS)
+        {
+            g_touch0_on_g_ctsu.p_api->scan(g_touch0_on_g_ctsu.p_ctrl);
+        }
+#endif
+        tx_thread_sleep (1);
+    }
+}
+```
+
+The project is now ready to connect to the PC and should exchange the measurement data available with the CTSU and TOUCH layers.
+
+Chapter 3
+=========
+To avoid manual configuration, Renesas provides PC based tuning tools such as Workbench6 which can operate the CTSU layer and
+calibrate the touch sensors for optimal operation. 
+
+An existing monitoring framework (as explained in the earlier chapter) is easily modified to tune the CTSU by simply setting the Tuning Framework mode to
+"Tuning" as shown below. The Touch Layer dependency of the Tuning Framework stack can also be removed.
+
+![USB Communications Framework used with the Tuning Framework](./images/TuningMode.PNG)
+
+It is important to note that the CTSU must not by operated by any other mechanism other than the Tuning Framework.
+The following code demonstrates the Tuning Framework function call order to operate the CTSU.
+
+```c
+
+{
+
+    g_sf_ctsu_tuning0.p_api->open(g_sf_ctsu_tuning0.p_ctrl, g_sf_ctsu_tuning0.p_cfg);
+
+    while (1)
+    {
+        g_sf_ctsu_tuning0.p_api->run(g_sf_ctsu_tuning0.p_ctrl);
+
+        tx_thread_sleep (1);
+    }
+}
+
+```
 
 # Next Steps #
 - [Give us feedback](https://docs.google.com/forms/d/e/1FAIpQLSc7yQtvK7MIOfIOQXw0DhHXMhZgAtjF1icO-gAiFlkGMjN0dg/viewform?usp=sf_link)
