@@ -1013,7 +1013,7 @@ int SerialCommandInitial(ctsu_instance_t * p_ctsu, const uint8_t itr)
     {
         for( ch_num = 0; ch_num < g_method_info[itr].enable; ch_num++)
         {
-            g_key_info[itr].sensor_index[ch_num] = 0x0;
+            g_key_info[itr].sensor_index[ch_num] = 0xff;
             g_sensors[itr][ch_num].rx = 0xff;
             g_sensors[itr][ch_num].tx = 0xff;
             if((ch_en & ((uint64_t)1<<ch_num))==((uint64_t)1<<ch_num))
@@ -1495,9 +1495,12 @@ static uint8_t GetMeasureTouchResult(uint16_t channel, uint16_t * value)
         for(itr = 0; (itr < g_method_info[g_access_method].enable); itr++)
         {
             index = g_key_info[g_access_method].sensor_index[itr];
-            if( ((uint64_t)1U<<index) == (((uint64_t)1U<<index) & binary_result.uint64)  )
-            {   /* */
-                binary_out.uint64 |= ((uint64_t)1U << itr);
+            if (0xff != index)
+            {
+                if( ((uint64_t)1U<<index) == (((uint64_t)1U<<index) & binary_result.uint64))
+                {   /* */
+                    binary_out.uint64 |= ((uint64_t)1U << itr);
+                }
             }
         }
 
@@ -4179,7 +4182,7 @@ static void SensorRegisterWriteResponse(com_data_tx_t * pcmd, uint16_t channel)
 static void SensorUtilityReadResponse(com_data_tx_t *pcmd, uint16_t channel)
 {
     uint16_t value;
-    uint16_t tmpval;
+    uint16_t tmpval = 0;
     uint8_t  status;
     uint8_t  size;
     uint16_t monitorSize;
@@ -4187,6 +4190,7 @@ static void SensorUtilityReadResponse(com_data_tx_t *pcmd, uint16_t channel)
     /* Set default value */
     size  = 1;
     value = 0;
+    status = CMD_RESULT_FAILURE;
 
     switch (pcmd->fmt.sub)
     {
@@ -4197,7 +4201,6 @@ static void SensorUtilityReadResponse(com_data_tx_t *pcmd, uint16_t channel)
         case 0x02:    // SET_BATCH
             break;
         case 0x03:    // EXEC_BATCH
-            status = CMD_RESULT_FAILURE;
             if (GetUtilityExecuteBatch(&pcmd->fmt.data[1], &monitorSize) != CMD_RESULT_FAILURE)
             {
                 monitorSize++;
