@@ -8,7 +8,7 @@
             <option display="Enabled" id="config.framework.sf_ctsu_tuning.param_check.true" value="1"/>
         </property>
         
-        <property default="config.framework.sf_ctsu_tuning.mode.tuning" display="Mode" id="config.framework.sf_ctsu_tuning.mode">
+        <property default="config.framework.sf_ctsu_tuning.mode.monitor" display="Mode" id="config.framework.sf_ctsu_tuning.mode">
             <option display="Tuning" id="config.framework.sf_ctsu_tuning.mode.tuning" value="1"/>
             <option display="Monitor" id="config.framework.sf_ctsu_tuning.mode.monitor" value="2"/>
         </property>
