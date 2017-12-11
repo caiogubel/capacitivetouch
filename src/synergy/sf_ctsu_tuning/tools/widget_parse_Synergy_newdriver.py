@@ -103,7 +103,7 @@ class MCU(object):
         cgc_search_patterns.append(r"(#define\s*TOUCH_CFG_UPLL_DIV\s*\((\d{1})\))")         ## 06
         cgc_search_patterns.append(r"(#define\s*TOUCH_CFG_ICK_DIV\s*\((\d{1})\))")          ## 07
         cgc_search_patterns.append(r"(#define\s*TOUCH_CFG_PCKB_DIV\s*\((\d{1})\))")         ## 08
-        cgc_search_patterns.append(r"(#define\s*TOUCH_CFG_HOCO_FREQUENCY\s*\((\d{1})\))")   ## 09
+        cgc_search_patterns.append(r"(#define\s*TOUCH_CFG_HOCO_FREQUENCY\s*\((\d{1,8})\))") ## 09
         cgc_search_patterns.append(r"(#define\s*WORKBENCH_SERIAL_CONNECT\s*\((\d{1})\))")   ## 10
         
         f_rd = open(src + "/Include/HwResource/r_cgc.h", 'r')
@@ -599,7 +599,7 @@ def write_xml(mcu, outfile=None):
     
     """ Calculate PCLKB frequency """
     if mcu.family == "113" or mcu.family == "130":
-        hoco_freq = 32000000
+        hoco_freq = 32000000 if int(mcu.hoco_freq) == 0 else int(mcu.hoco_freq)
     elif mcu.family == "231" or mcu.family == "230":
         hoco_freq = 32000000 if int(mcu.hoco_freq) == 0 else 54000000
      
