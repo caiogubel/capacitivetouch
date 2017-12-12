@@ -141,10 +141,10 @@
         </property> 
         
         
-        <property default="module.driver.ctsu.txvsel.vcc" display="Transmit Pin Power Supply" id="module.driver.ctsu.txvsel">
+        <!--<property default="module.driver.ctsu.txvsel.vcc" display="Transmit Pin Power Supply" id="module.driver.ctsu.txvsel">
             <option display="From Vcc" id="module.driver.ctsu.txvsel.vcc" value="0"/>
             <option display="Interal logic power supply" id="module.driver.ctsu.txvsel.internal" value="1"/>
-        </property>
+        </property>-->
         
         <property default="module.driver.ctsu.ctsusoff.enabled" display="High-pass noise reduction function" id="module.driver.ctsu.ctsusoff">
             <option display="Enabled" id="module.driver.ctsu.ctsusoff.enabled" value="0"/>
@@ -164,7 +164,7 @@
         <property default="g_ctsu${_instance}_data_buffer" display="CTSU Output Buffer Location" id="module.driver.ctsu.p_sensor_data">
             <constraint display="Name must be a valid C symbol">testSymbol("${module.driver.ctsu.p_sensor_data}")</constraint>
         </property>
-        <property default="4000000" display="PCLKB used while tuning" id="module.driver.ctsu.pclkb_hz">
+        <property default="4000000" display="PCLKB needed " id="module.driver.ctsu.pclkb_hz">
             <constraint display="Value must be greater than 4MHz">testInteger("${module.driver.ctsu.pclkb_hz}")  &amp;&amp; ("${module.driver.ctsu.pclkb_hz}" &gt;= 4000000)</constraint>
         </property>
         <property default="NULL" display="Callback Function" id="module.driver.ctsu.p_callback">
@@ -831,7 +831,7 @@
         #define CTSUCHTRC4_${module.driver.ctsu.mode}_TRANSMIT_TS   ((TR_${module.driver.ctsu.mode}_TS35&lt;&lt;3)|(TR_${module.driver.ctsu.mode}_TS34&lt;&lt;2)|(TR_${module.driver.ctsu.mode}_TS33&lt;&lt;1)|(TR_${module.driver.ctsu.mode}_TS32&lt;&lt;0))
         
         /*****    CTSUCR0 - CTSU control register 0    ************************************************************************/
-        #define ${module.driver.ctsu.mode}_CTSUTXVSEL               (${module.driver.ctsu.txvsel})
+        #define ${module.driver.ctsu.mode}_CTSUTXVSEL               (0)/* (${module.driver.ctsu.txvsel}) */
         
         /*****    CTSUCR1 - CTSU channel register 1    ************************************************************************/
         #define ${module.driver.ctsu.mode}_PCLK                     (${module.driver.ctsu.pclkb_div})

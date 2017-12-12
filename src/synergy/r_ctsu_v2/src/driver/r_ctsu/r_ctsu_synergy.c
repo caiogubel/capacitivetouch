@@ -606,7 +606,7 @@ ctsu_err_t R_CTSU_Control(ctsu_ctrl_t *const p_ctrl, ctsu_control_arg_t* p_arg)
     }
     else
     {
-        /* (CTSU_CMD_SET_TWO_ARG_LAST > cmd)*/
+
         ctsu_control_arg_ext_t* p_context = (ctsu_control_arg_ext_t*)p_arg->p_context;
 #if (CTSU_CFG_PARAM_CHECKING_ENABLE > 0)
         ASSERT(p_ctrl_blk->num_sensors > p_context->offset);

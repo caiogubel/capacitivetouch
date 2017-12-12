@@ -615,14 +615,8 @@ touch_err_t R_TOUCH_Read(touch_ctrl_t * const p_ctrl, touch_read_t const * const
     ASSERT(OPEN == pctrl->open);
 #endif
 
-#if 0
-    /** a. Check resource lock */
-    if( SSP_SUCCESS !=R_BSP_SoftwareLock(&pctrl->lock) )
-    {
-        /* Other API is busy with this handle. */
-        return TOUCH_ERR_LOCKED;
-    }
-#endif
+    /** a. Check resource lock (Removed as it causes lock-ups when data is requested asynchronously,
+     * which is fine) */
 
     /** b. Read from control block into user specified destination. */
     if(TOUCH_DATA_BINARY==p_arg->read_cmd)
@@ -723,10 +717,7 @@ touch_err_t R_TOUCH_Read(touch_ctrl_t * const p_ctrl, touch_read_t const * const
                 break;
         }
     }
-#if 0
-    /* Unlock the block */
-    R_BSP_SoftwareUnlock(&pctrl->lock);
-#endif
+
     return touch_err;
 }
 /***********************************************************************************************************************
@@ -1951,16 +1942,8 @@ static void touch_common_callback(ctsu_callback_arg_t const*const p_arg)
                 if (NULL != p_ctrl->p_callback[itr])
                 {
                     p_ctrl->p_callback[itr](&arg);
-/*
-                    This is removed.
-                    if (TOUCH_EVENT_REQUEST_DELAY == arg.event)
-                    {
-                        break;  //Avoiding multiple delay requests to upper layers
-                    }
-*/
                 }
             }
-
         }
     }
 }

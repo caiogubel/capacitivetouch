@@ -118,9 +118,9 @@
         <property default="g_touch${_instance}_binary" display="Binary Result Buffer" id="module.driver.touch.p_binary_result">
             <constraint display="Name must be a valid C symbol">testSymbol("${module.driver.touch.p_binary_result}")</constraint>
         </property>
-        <property default="0" display="Paused Drift Compensations (N iterations)" id="module.driver.touch.drift_hold_limit">
+        <!-- <property default="0" display="Paused Drift Compensations (N iterations)" id="module.driver.touch.drift_hold_limit">
             <constraint display="Name must be a valid C symbol">testInteger("${module.driver.touch.drift_hold_limit}")  &amp;&amp; ("${module.driver.touch.drift_hold_limit}" &gt;= 0) &amp;&amp; ("${module.driver.touch.drift_hold_limit}" &lt; 65536)</constraint>
-        </property>
+        </property> -->
         <property default="65535" display="Continuous ON limiter (N iterations)" id="module.driver.touch.on_limit">
             <constraint display="Name must be a valid C symbol">testInteger("${module.driver.touch.on_limit}")  &amp;&amp; ("${module.driver.touch.on_limit}" &gt;= 0) &amp;&amp; ("${module.driver.touch.on_limit}" &lt; 65536)</constraint>
         </property>
@@ -153,7 +153,7 @@
         #if (DATA_SOURCE == DATA_SOURCE_SSPCONFIG)
         static touch_common_parameter_t ${module.driver.touch.name}_common_parameter =
         {
-            .drift_hold_limit = ${module.driver.touch.drift_hold_limit},
+            .drift_hold_limit = 0 /* ${module.driver.touch.drift_hold_limit} */,
             .on_limit = ${module.driver.touch.on_limit},
             .max_touched_sensors = ${module.driver.touch.max_touched_sensors},
         };

@@ -253,7 +253,7 @@ uint32_t hw_ctsu_poweroff (void)
 #endif /* #if defined(BSP_API_H) */
 
 #else
-//    ssp_vector_info_t * p_vector_info;
+
     fmi_event_info_t event_info = {(IRQn_Type) 0U};
     g_fmi_on_fmi.eventInfoGet(&ssp_feature, SSP_SIGNAL_CTSU_WRITE, &event_info);
     write_irq = event_info.irq;
@@ -291,7 +291,7 @@ uint32_t hw_ctsu_poweroff (void)
 #else
     R_BSP_HardwareUnlock(&ssp_feature);
 #endif
-#endif // defined(BSP_API_H)
+#endif /* defined(BSP_API_H) */
 
     return SSP_SUCCESS;
 }

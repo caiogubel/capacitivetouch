@@ -4087,18 +4087,6 @@ static void SensorRegisterWriteResponse(com_data_tx_t * pcmd, uint16_t channel)
             break;
         case 0x01:    // CR1
             status = SetRegisterCTSUCR1(value);
-
-            /* Set flags for the touch measurement */
-//            for (i = 0; i < METHOD_NUM; i++) {
-//                g_touch_function[i].flag.tuning  = 0;
-//                g_touch_function[i].flag.calib   = 1;
-//                g_touch_function[i].flag.average = 0;
-//                for (num = 0; num < g_key_info[i].ena_num; num++)
-//                {
-//                    *(g_touch_tuning_info[i].result + num) = 0;
-//                }
-//            }
-//            g_touch_system.flag.initial = 0;
             break;
         case 0x02:    // SDPRS
             status = SetRegisterCTSUSDPRS(value);
@@ -4334,8 +4322,8 @@ static void SensorUtilityWriteResponse(com_data_tx_t *pcmd, uint16_t channel)
             monitor_command.size = com_data.fmt.size;
             status = CMD_RESULT_SUCCESS;
             break;
-//        case 0x03:    // EXEC_BATCH (Read only)
-//            break;
+        case 0x03:    // EXEC_BATCH (Read only)
+            break;
         case 0x04:    // MEASURE
 #if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_TUNING)
             if (0 != com_data.fmt.data[0])
@@ -4365,18 +4353,18 @@ static void SensorUtilityWriteResponse(com_data_tx_t *pcmd, uint16_t channel)
             status = CMD_RESULT_SUCCESS;
 #endif
             break;
-//        case 0x05:    // FLAGS (Read only)
-//            break;
-//        case 0x06:    // WAIT (Read only)
-//            break;
+        case 0x05:    // FLAGS (Read only)
+            break;
+        case 0x06:    // WAIT (Read only)
+            break;
         case 0x07:  // Burst mode
             g_burst_mode    = com_data.fmt.data[0];
             status = CMD_RESULT_SUCCESS;
             break;
-//        case 0x08:  // METHOD (Read ony)
-//            break;
-//        case 0x09:  // METHOD_INFO (Read only)
-//            break;
+        case 0x08:  // METHOD (Read ony)
+            break;
+        case 0x09:  // METHOD_INFO (Read only)
+            break;
         case 0x0a:  // ACCESS_METHOD
             if (com_data.fmt.data[0] < METHOD_NUM)
             {
