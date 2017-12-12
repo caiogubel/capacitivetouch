@@ -55,7 +55,7 @@
         </content>
     </config>
     
-    <module config="config.framework.sf_ctsu_tuning" display="Framework|Input|${module.framework.sf_ctsu_tuning.name} CTSU Tuning Framework on sf_ctsu_tuning" common="100" id="module.framework.sf_ctsu_tuning" version="1">
+    <module config="config.framework.sf_ctsu_tuning" display="Framework|Input|${module.framework.sf_ctsu_tuning.name} CTSU Tuning Framework on sf_ctsu_tuning_v2" common="100" id="module.framework.sf_ctsu_tuning" version="1">
         <constraint display="Unique name required for each instance">
             "${interface.framework.sf_ctsu_tuning.${module.framework.sf_ctsu_tuning.name}}" === "1"
         </constraint>
@@ -73,7 +73,7 @@
         <property default="${_instance}" display="Index (Do Not Modify)" id="module.framework.sf_ctsu_tuning.count"> 
             <constraint display="Value must be a non-negative integer">testInteger("${module.framework.sf_ctsu_tuning.count}")  &amp;&amp; ("${module.framework.sf_ctsu_tuning.count}" &gt;= 0) &amp;&amp; ("${module.framework.sf_ctsu_tuning.count}" &lt; 8)</constraint>
         </property>
-        <property default="g_comms" display="Communication Interface" id="module.framework.sf_ctsu_tuning.comms">
+        <property default="g_sf_comms0" display="Communication Interface" id="module.framework.sf_ctsu_tuning.comms">
             <constraint display="Name must be a valid C symbol">testSymbol("${module.framework.sf_ctsu_tuning.comms}")</constraint>
         </property>
         

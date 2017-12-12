@@ -153,7 +153,7 @@
         
         <property default="module.driver.data.workbench" display="CTSU Information Buffers and Settings" id="module.driver.ctsu.data">
             <option display="Provided by Workbench6" id="module.driver.data.workbench" value="0"/>
-            <option display="Initialized to through Configurator" id="module.driver.data.generated" value="1"/>
+            <option display="Initialized through Configurator" id="module.driver.data.generated" value="1"/>
         </property>
         <property default="g_ctsu${_instance}_common_sfrs" display="CTSU Settings (Common to all sensors)" id="module.driver.ctsu.p_ctsu_settings">
             <constraint display="Name must be a valid C symbol"> testSymbol("${module.driver.ctsu.p_ctsu_settings}")</constraint>
@@ -164,7 +164,7 @@
         <property default="g_ctsu${_instance}_data_buffer" display="CTSU Output Buffer Location" id="module.driver.ctsu.p_sensor_data">
             <constraint display="Name must be a valid C symbol">testSymbol("${module.driver.ctsu.p_sensor_data}")</constraint>
         </property>
-        <property default="4000000" display="PCLKB Frequency (fix to Workbench6 Input)" id="module.driver.ctsu.pclkb_hz">
+        <property default="4000000" display="PCLKB used while tuning" id="module.driver.ctsu.pclkb_hz">
             <constraint display="Value must be greater than 4MHz">testInteger("${module.driver.ctsu.pclkb_hz}")  &amp;&amp; ("${module.driver.ctsu.pclkb_hz}" &gt;= 4000000)</constraint>
         </property>
         <property default="NULL" display="Callback Function" id="module.driver.ctsu.p_callback">
@@ -1402,6 +1402,11 @@
             <!--<option display="TS-35" id="module.driver.ctsu_sensor.tx.35" value="35"/>-->
             <!--<option display="TS-36" id="module.driver.ctsu_sensor.tx.36" value="36"/>-->
         </property>
+		
+		<property default="module.driver.ctsu_sensor.sep0.none" display="CTSU SFRs (Restrictions for Modification)" id="module.driver.ctsu_sensor.sep0">
+            <option display=" " id="module.driver.ctsu_sensor.sep0.none" value="0"/>
+        </property>
+		
         <property default="0" display="Spectrum Diffusion Setting (CTSUSSDIV)" id="module.driver.ctsu_sensor.ctsussdiv">
             <constraint display="Value must be in range (0-16)">testInteger("${module.driver.ctsu_sensor.ctsussdiv}")  &amp;&amp; ("${module.driver.ctsu_sensor.ctsussdiv}" &gt;= 0) &amp;&amp; ("${module.driver.ctsu_sensor.ctsussdiv}" &lt; 16)</constraint>
         </property>
@@ -1439,7 +1444,7 @@
         </property>
         
         <property default="module.driver.ctsu_sensor.sep2.none" display="DRIFT COMPENSATION PARAMETERS" id="module.driver.ctsu_sensor.sep2">
-            <option display="---------------------------------" id="module.driver.ctsu_sensor.sep2.none" value="0"/>
+            <option display=" " id="module.driver.ctsu_sensor.sep2.none" value="0"/>
         </property>
         
         <property default="1000" display="Drift Compensation Interval" id="module.driver.ctsu_sensor.drift">
@@ -1453,7 +1458,7 @@
         </property>-->
         
         <property default="module.driver.ctsu_sensor.sep3.none" display="RUN-TIME OFFSET CURRENT ADJUSTMENT PARAMETERS" id="module.driver.ctsu_sensor.sep3">
-            <option display="---------------------------------" id="module.driver.ctsu_sensor.sep3.none" value="0"/>
+            <option display=" " id="module.driver.ctsu_sensor.sep3.none" value="0"/>
         </property>
         
         <property default="1000" display="Offset Current Adjustment Interval" id="module.driver.ctsu_sensor.offset_interval">

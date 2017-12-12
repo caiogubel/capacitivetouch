@@ -36,7 +36,7 @@
         <!--<property default="100" display="Calibration (Lower Limit Count)" id="config.driver.touch_v2.lower_limit">
             <constraint display="Name must be number greater than 0">testInteger("${config.driver.touch_v2.lower_limit}")  &amp;&amp; ("${config.driver.touch_v2.lower_limit}" &gt; 0)</constraint>
         </property>-->
-        <property default="1" display="Max. Upper Layer Callbacks" id="config.driver.touch_v2.max_upper_cb">
+        <property default="1" display="Max. Upper Layer Callbacks (Do Not Modify)" id="config.driver.touch_v2.max_upper_cb">
             <constraint display="Name must be number greater than 0">testInteger("${config.driver.touch_v2.max_upper_cb}")  &amp;&amp; ("${config.driver.touch_v2.max_upper_cb}" &gt; 0)</constraint>
         </property>             
         <property default="1" display="Max. Error Count Before reporting to upper layer" id="config.driver.touch_v2.max_err">

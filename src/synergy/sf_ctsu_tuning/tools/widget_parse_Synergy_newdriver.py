@@ -447,7 +447,7 @@ const uint8_t g_num_ctsu_configs = %(count)s;
 #     
     """ Calculate PCLKB frequency """
     if mcu.family == "113" or mcu.family == "130":
-        hoco_freq = 32000000
+        hoco_freq = 32000000 if int(mcu.hoco_freq) == 0 else int(mcu.hoco_freq)
     elif mcu.family == "231" or mcu.family == "230":
         hoco_freq = 32000000 if int(mcu.hoco_freq) == 0 else 54000000
      
