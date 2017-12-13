@@ -17,7 +17,7 @@
 * Copyright (C) 2017 Renesas Electronics Corporation. All rights reserved.    
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
-* File Name    : sf_ctsu_tuning_.h
+* File Name    : sf_ctsu_comm_.h
 * Version      : 1.0 <- Optional as long as history is shown below
 * Description  : This module solves all the world's problems
 ***********************************************************************************************************************/
@@ -26,12 +26,12 @@
 *         : 15.01.2007 1.00     First Release
 ***********************************************************************************************************************/
 
-#ifndef SF_CTSU_TUNING_H_
-#define SF_CTSU_TUNING_H_
+#ifndef SF_CTSU_COMM_H_
+#define SF_CTSU_COMM_H_
 
 #include "r_ctsu_api.h"
 #include "r_touch_api.h"
-#include "sf_ctsu_tuning_api.h"
+#include "sf_ctsu_comm_api.h"
 
 /***********************************************************************************************************************
 Macro definitions
@@ -46,14 +46,14 @@ typedef struct
     void const * p_comms;
     ctsu_instance_t const * p_ctsu;
     touch_instance_t const * p_touch;
-}sf_ctsu_tuning_instance_ctrl_t;
+}sf_ctsu_comm_instance_ctrl_t;
 
 /***********************************************************************************************************************
 Exported global variables
 ***********************************************************************************************************************/
-extern const sf_ctsu_tuning_api_t g_ctsu_tuning_api;
+extern const sf_ctsu_comm_api_t g_ctsu_comm_api;
 /***********************************************************************************************************************
 Exported global functions (to be accessed by other files)
 ***********************************************************************************************************************/
 
-#endif /* SF_CTSU_TUNING_H_ */
+#endif /* SF_CTSU_COMM_H_ */

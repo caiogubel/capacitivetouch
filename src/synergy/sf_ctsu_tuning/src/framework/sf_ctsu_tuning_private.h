@@ -17,7 +17,7 @@
 * Copyright (C) 2017 Renesas Electronics Corporation. All rights reserved.    
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
-* File Name    : sf_ctsu_tuning_private.h
+* File Name    : sf_ctsu_comm_private.h
 * Version      : 1.0 <- Optional as long as history is shown below
 * Description  : This module solves all the world's problems
 ***********************************************************************************************************************/
@@ -26,8 +26,8 @@
 *         : 15.01.2007 1.00     First Release
 ***********************************************************************************************************************/
 
-#ifndef SF_CTSU_TUNING_SRC_FRAMEWORK_SF_CTSU_TUNING_PRIVATE_H_
-#define SF_CTSU_TUNING_SRC_FRAMEWORK_SF_CTSU_TUNING_PRIVATE_H_
+#ifndef SF_CTSU_COMM_SRC_FRAMEWORK_SF_CTSU_COMM_PRIVATE_H_
+#define SF_CTSU_COMM_SRC_FRAMEWORK_SF_CTSU_COMM_PRIVATE_H_
 
 /***********************************************************************************************************************
 Macro definitions
@@ -44,8 +44,8 @@ Exported global variables
 /***********************************************************************************************************************
 Exported global functions (to be accessed by other files)
 ***********************************************************************************************************************/
-ssp_err_t SF_CTSU_TuneOpen(sf_ctsu_tuning_ctrl_t * const p_ctrl, sf_ctsu_tuning_cfg_t  const * const p_cfg);
-ssp_err_t SF_CTSU_TuneClose(sf_ctsu_tuning_ctrl_t const * const p_ctrl);
-ssp_err_t SF_CTSU_TuneRun(sf_ctsu_tuning_ctrl_t * const p_ctrl);
+ssp_err_t SF_CTSU_TuneOpen(sf_ctsu_comm_ctrl_t * const p_ctrl, sf_ctsu_comm_cfg_t  const * const p_cfg);
+ssp_err_t SF_CTSU_TuneClose(sf_ctsu_comm_ctrl_t const * const p_ctrl);
+ssp_err_t SF_CTSU_TuneRun(sf_ctsu_comm_ctrl_t * const p_ctrl);
 
-#endif /* SF_CTSU_TUNING_SRC_FRAMEWORK_SF_CTSU_TUNING_PRIVATE_H_ */
+#endif /* SF_CTSU_COMM_SRC_FRAMEWORK_SF_CTSU_COMM_PRIVATE_H_ */

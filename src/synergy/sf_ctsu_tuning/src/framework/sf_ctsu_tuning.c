@@ -17,7 +17,7 @@
 * Copyright (C) 2017 Renesas Electronics Corporation. All rights reserved.    
 ***********************************************************************************************************************/
 /***********************************************************************************************************************
-* File Name    : sf_ctsu_tuning.c
+* File Name    : sf_ctsu_comm.c
 * Version      : 1.0
 * Description  : This module allows communication with Workbench6
 ***********************************************************************************************************************/
@@ -30,16 +30,16 @@
 Includes   <System Includes> , "Project Includes"
 ***********************************************************************************************************************/
 #include "bsp_api.h"
-#include "sf_ctsu_tuning_cfg.h"
+#include "sf_ctsu_comm_cfg.h"
 
-#define COMM_FRAMEWORK_CONDITION ((BSP_CFG_RTOS==true) && (SF_CTSU_TUNING_CFG_CONNECTION==1))
+#define COMM_FRAMEWORK_CONDITION ((BSP_CFG_RTOS==true) && (SF_CTSU_COMM_CFG_CONNECTION==1))
 #if (COMM_FRAMEWORK_CONDITION==true)
 #include "sf_comms_api.h"
 #else
 #include "r_uart_api.h"
 #endif
-#include "sf_ctsu_tuning.h"
-#include "sf_ctsu_tuning_private.h"
+#include "sf_ctsu_comm.h"
+#include "sf_ctsu_comm_private.h"
 
 #include "deps/r_serial_control.h"
 
@@ -49,12 +49,12 @@ Includes   <System Includes> , "Project Includes"
 /***********************************************************************************************************************
 Macro definitions
 ***********************************************************************************************************************/
-#if !defined(SF_CTSU_TUNING_CFG_SCI_SIZE_CHECK_COUNT)
-#define SF_CTSU_TUNING_CFG_SCI_SIZE_CHECK_COUNT            (2)
+#if !defined(SF_CTSU_COMM_CFG_SCI_SIZE_CHECK_COUNT)
+#define SF_CTSU_COMM_CFG_SCI_SIZE_CHECK_COUNT            (2)
 #endif
 
-#if !defined(SF_CTSU_TUNING_CFG_SCI_BASE_DATA_SIZE)
-#define SF_CTSU_TUNING_CFG_SCI_BASE_DATA_SIZE              (3)
+#if !defined(SF_CTSU_COMM_CFG_SCI_BASE_DATA_SIZE)
+#define SF_CTSU_COMM_CFG_SCI_BASE_DATA_SIZE              (3)
 #endif
 
 /***********************************************************************************************************************
@@ -65,10 +65,10 @@ Typedef definitions
 Exported global variables (to be accessed by other files)
 ***********************************************************************************************************************/
 static uint8_t receive_data[36] = {0xFF, 0xFF, 0xFF, 0xFF};
-static uint8_t transmit_data[270 + SF_CTSU_TUNING_CFG_SCI_BASE_DATA_SIZE];
+static uint8_t transmit_data[270 + SF_CTSU_COMM_CFG_SCI_BASE_DATA_SIZE];
 
 #if (COMM_FRAMEWORK_CONDITION==true)
-static uint8_t host_comm_thread_stack[SF_CTSU_TUNING_CFG_THREAD_STACK_SIZE];
+static uint8_t host_comm_thread_stack[SF_CTSU_COMM_CFG_THREAD_STACK_SIZE];
 static TX_THREAD host_comm_thread;
 static void host_communication_thread(ULONG input);
 #else
@@ -84,7 +84,7 @@ void wkbh_uart_callback(uart_callback_args_t * arg);
 #endif
 
 
-sf_ctsu_tuning_api_t const g_ctsu_tuning_api =
+sf_ctsu_comm_api_t const g_ctsu_comm_api =
 {
  .open = SF_CTSU_TuneOpen,
  .run = SF_CTSU_TuneRun,
@@ -95,31 +95,31 @@ Private global variables and functions
 ***********************************************************************************************************************/
 static ctsu_ctrl_t * ctsu_ctrls[MAX_CTSU_CFG_COUNT];
 
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
 static touch_ctrl_t * touch_ctrls[MAX_TOUCH_CFG_COUNT];
 #endif
 
 
-ssp_err_t SF_CTSU_TuneOpen(sf_ctsu_tuning_ctrl_t * const p_vctrl, sf_ctsu_tuning_cfg_t const * const p_cfg)
+ssp_err_t SF_CTSU_TuneOpen(sf_ctsu_comm_ctrl_t * const p_vctrl, sf_ctsu_comm_cfg_t const * const p_cfg)
 {
-#if (SF_CTSU_TUNING_CFG_PARAM_CHECK==1)
+#if (SF_CTSU_COMM_CFG_PARAM_CHECK==1)
     SSP_ASSERT(p_vctrl != NULL);
     SSP_ASSERT(p_cfg->p_comms != NULL);
     SSP_ASSERT(p_cfg->p_ctsu != NULL);
 #endif
     ssp_err_t err = SSP_SUCCESS;
 
-    sf_ctsu_tuning_instance_ctrl_t * p_ctrl = p_vctrl;
+    sf_ctsu_comm_instance_ctrl_t * p_ctrl = p_vctrl;
 
     /** Initialize Serial Communication Structures */
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
 
     if(!SerialCommandInitialTouch((touch_instance_t *)p_cfg->p_touch, (uint8_t)p_cfg->index))
     {
         err = SSP_ERR_INVALID_ARGUMENT;
     }
 
-#elif (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_TUNING)
+#elif (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_COMM)
     if(!SerialCommandInitial((ctsu_instance_t *)p_cfg->p_ctsu, (uint8_t)p_cfg->index))
     {
         err = SSP_ERR_INVALID_ARGUMENT;
@@ -149,11 +149,11 @@ ssp_err_t SF_CTSU_TuneOpen(sf_ctsu_tuning_ctrl_t * const p_vctrl, sf_ctsu_tuning
         }
 
         ctsu_ctrls[itr] = p_cfg->p_ctsu->p_ctrl;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
         touch_ctrls[itr] = p_cfg->p_touch->p_ctrl;
 #endif
 
-#if (SF_CTSU_TUNING_CFG_CONNECTION==2)
+#if (SF_CTSU_COMM_CFG_CONNECTION==2)
         uart_instance_t const * const p_uart = p_cfg->p_comms;
         if(p_uart->p_cfg->p_callback != wkbh_uart_callback)
         {
@@ -173,7 +173,7 @@ ssp_err_t SF_CTSU_TuneOpen(sf_ctsu_tuning_ctrl_t * const p_vctrl, sf_ctsu_tuning
                           (ULONG) p_ctrl,
                           &host_comm_thread_stack[0],
                           sizeof(host_comm_thread_stack),
-                          SF_CTSU_TUNING_CFG_THREAD_PRIORITY,
+                          SF_CTSU_COMM_CFG_THREAD_PRIORITY,
                           1,
                           1,
                           TX_AUTO_START);
@@ -182,18 +182,18 @@ ssp_err_t SF_CTSU_TuneOpen(sf_ctsu_tuning_ctrl_t * const p_vctrl, sf_ctsu_tuning
     return err;
 }
 
-ssp_err_t SF_CTSU_TuneRun(sf_ctsu_tuning_ctrl_t * const p_vctrl)
+ssp_err_t SF_CTSU_TuneRun(sf_ctsu_comm_ctrl_t * const p_vctrl)
 {
-    sf_ctsu_tuning_instance_ctrl_t * const p_ctrl = p_vctrl;
+    sf_ctsu_comm_instance_ctrl_t * const p_ctrl = p_vctrl;
     ssp_err_t err = SSP_SUCCESS;
 
-#if (SF_CTSU_TUNING_CFG_CONNECTION==0)
+#if (SF_CTSU_COMM_CFG_CONNECTION==0)
     PrepareReplayMessage();
 #endif
 
     if (NULL != p_ctrl->p_comms)
     {
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_TUNING)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_COMM)
         extern uint8_t g_access_method;
         extern volatile uint8_t       g_ctsu_soft_mode;
         if (0 != g_ctsu_soft_mode)
@@ -224,7 +224,7 @@ ssp_err_t SF_CTSU_TuneRun(sf_ctsu_tuning_ctrl_t * const p_vctrl)
         }
 #endif
 
-#if (SF_CTSU_TUNING_CFG_CONNECTION==2)
+#if (SF_CTSU_COMM_CFG_CONNECTION==2)
         if (1 == receive_flag)
         {
             if (0 == send_flag)
@@ -251,7 +251,7 @@ static void host_communication_thread(ULONG p_arg)
 {
     ssp_err_t err = 0;
     uint16_t send_count;
-    sf_ctsu_tuning_instance_ctrl_t const * const p_ctrl = (sf_ctsu_tuning_instance_ctrl_t const * const )p_arg;
+    sf_ctsu_comm_instance_ctrl_t const * const p_ctrl = (sf_ctsu_comm_instance_ctrl_t const * const )p_arg;
 
     sf_comms_instance_t const * const p_comms = p_ctrl->p_comms;
 
@@ -289,7 +289,7 @@ static void host_communication_thread(ULONG p_arg)
                                                data_count * TX_TIMER_TICKS_PER_SECOND);
         }
 
-#if (SF_CTSU_TUNING_CFG_CONNECTION == 1)
+#if (SF_CTSU_COMM_CFG_CONNECTION == 1)
         if(SerialCommandReceive(&receive_data[0], (uint16_t)(UINT16_C(4) + data_count)))
         {
             if (GetReplayMessage(&transmit_data[0],&send_count))
@@ -333,21 +333,21 @@ void wkbh_uart_callback(uart_callback_args_t * p_arg)
     {
         receive_data[receive_count] = (uint8_t)(p_arg->data & 0xFF);
 
-        if (SF_CTSU_TUNING_CFG_SCI_SIZE_CHECK_COUNT == receive_count)                    /* SCI6 Receive data size check              */
+        if (SF_CTSU_COMM_CFG_SCI_SIZE_CHECK_COUNT == receive_count)                    /* SCI6 Receive data size check              */
         {
             if (0x00 == receive_data[receive_count])           /* Receive data = 0 check                    */
             {
                 /* Data size = 3 setting (main command + sub command + size + check sum) */
-                receive_data_size = SF_CTSU_TUNING_CFG_SCI_BASE_DATA_SIZE;
+                receive_data_size = SF_CTSU_COMM_CFG_SCI_BASE_DATA_SIZE;
             }
             else
             {
                 /* Data size = (3 + data size) setting (main command + sub command + size + check sum + data size) */
-                receive_data_size = (uint16_t)(SF_CTSU_TUNING_CFG_SCI_BASE_DATA_SIZE + receive_data[SF_CTSU_TUNING_CFG_SCI_SIZE_CHECK_COUNT]);
+                receive_data_size = (uint16_t)(SF_CTSU_COMM_CFG_SCI_BASE_DATA_SIZE + receive_data[SF_CTSU_COMM_CFG_SCI_SIZE_CHECK_COUNT]);
             }
         }
 
-        if (SF_CTSU_TUNING_CFG_SCI_SIZE_CHECK_COUNT < receive_count)
+        if (SF_CTSU_COMM_CFG_SCI_SIZE_CHECK_COUNT < receive_count)
         {
             if (receive_data_size == receive_count)
             {
