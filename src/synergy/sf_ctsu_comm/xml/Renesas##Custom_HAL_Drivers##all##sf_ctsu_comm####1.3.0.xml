@@ -55,7 +55,7 @@
         </content>
     </config>
     
-    <module config="config.framework.sf_ctsu_comm" display="Framework|Input|${module.framework.sf_ctsu_comm.name} CTSU Tuning Framework on sf_ctsu_comm_v2" common="100" id="module.framework.sf_ctsu_comm" version="1">
+    <module config="config.framework.sf_ctsu_comm" display="Framework|Input|${module.framework.sf_ctsu_comm.name} CTSU Communication Framework on sf_ctsu_comm_v2" common="100" id="module.framework.sf_ctsu_comm" version="1">
         <constraint display="Unique name required for each instance">
             "${interface.framework.sf_ctsu_comm.${module.framework.sf_ctsu_comm.name}}" === "1"
         </constraint>
