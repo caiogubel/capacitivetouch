@@ -11,8 +11,13 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>com.renesas.cdt.synergy.contentgen.synergyBuilder</name>
+			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
+			<triggers>full,incremental,</triggers>
 			<arguments>
+				<dictionary>
+					<key>LaunchConfigHandle</key>
+					<value>&lt;project&gt;/.externalToolBuilders/com.renesas.cdt.synergy.contentgen.synergyBuilder.launch</value>
+				</dictionary>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
@@ -52,9 +57,9 @@
 			<locationURI>WORKSPACE_LOC/synergy/sf_button_v2</locationURI>
 		</link>
 		<link>
-			<name>synergy/sf_ctsu_tuning</name>
+			<name>synergy/sf_ctsu_comm</name>
 			<type>2</type>
-			<locationURI>WORKSPACE_LOC/synergy/sf_ctsu_tuning</locationURI>
+			<locationURI>WORKSPACE_LOC/synergy/sf_ctsu_comm</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

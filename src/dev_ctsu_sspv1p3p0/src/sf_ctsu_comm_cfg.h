@@ -10,7 +10,7 @@
 #define SF_CTSU_COMM_CFG_MODE_COMM      (1)
 #define SF_CTSU_COMM_CFG_MODE_MONITOR     (2)
 
-#define SF_CTSU_COMM_CFG_MODE             (2)
+#define SF_CTSU_COMM_CFG_MODE             (1)
 
 #define SF_CTSU_COMM_CFG_THREAD_STACK_SIZE    (1024)
 

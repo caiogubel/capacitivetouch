@@ -91,8 +91,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/synergy/r_touch_v2/inc/driver/api}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/synergy/r_touch_v2/inc/driver/instances}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/unity}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/synergy/sf_ctsu_tuning/inc/framework/api}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/synergy/sf_ctsu_tuning/inc/framework/instances}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/synergy/sf_ctsu_comm/inc/framework/api}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/synergy/sf_ctsu_comm/inc/framework/instances}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/synergy/sf_button_v2/inc/driver/api}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/synergy/sf_button_v2/inc/driver/instances}&quot;"/>
 								</option>
@@ -314,5 +314,12 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/dev_ctsu_sspv1p3p0"/>
+		</configuration>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/dev_ctsu_sspv1p3p0"/>
+		</configuration>
+	</storageModule>
 </cproject>
