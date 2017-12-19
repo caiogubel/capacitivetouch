@@ -1182,7 +1182,7 @@ static void sensor_optimize_sensitivity(void * p_arg)
 
         ctsu_err = p_optimize_args->p_ctsu->p_api->control(p_optimize_args->p_ctsu->p_ctrl, &arg);
 #if (TOUCH_CFG_PARAM_CHECKING_ENABLE==true)
-        /*ASSERT(CTSU_SUCCESS == ctsu_err); */
+        ASSERT(CTSU_SUCCESS == ctsu_err);
 #endif
         ctsuso = arg_ext.value & 0x3FF;
 
@@ -1208,7 +1208,7 @@ static void sensor_optimize_sensitivity(void * p_arg)
         arg.cmd = CTSU_CMD_SET_CTSUSO0;
         ctsu_err = p_optimize_args->p_ctsu->p_api->control(p_optimize_args->p_ctsu->p_ctrl, &arg);
 #if (TOUCH_CFG_PARAM_CHECKING_ENABLE==true)
-        /*ASSERT(CTSU_SUCCESS == ctsu_err); */
+        ASSERT(CTSU_SUCCESS == ctsu_err);
 #endif
         count = 0;
     }
@@ -1389,14 +1389,10 @@ static uint16_t sensors_touched(touch_instance_ctrl_t * const p_ctrl)
                 /* Set bit-mask */
                 num_touched_sensors = (uint16_t)(num_touched_sensors + 1U);
                 p_ctrl->p_binary_result[byte_offset] |= bit_mask;
-
-                /*p_ctrl->p_sensor[itr].delta = abs(detect_arg.input - detect_arg.baseline);*/
             }
             else
             {   /* Clear bit-mask */
                 p_ctrl->p_binary_result[byte_offset] = (uint8_t)(p_ctrl->p_binary_result[byte_offset] & (~bit_mask));
-
-                /*p_ctrl->p_sensor[itr].delta = 0;*/
             }
         }
     }
