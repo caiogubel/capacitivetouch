@@ -37,8 +37,8 @@
 /* Start user code for include. Do not edit comment generated here */
 #include "r_ctsu_cfg.h"
 #include "r_ctsu_api.h"
-#include "sf_ctsu_tuning_cfg.h"
-#include "sf_ctsu_tuning.h"
+#include "sf_ctsu_comm_cfg.h"
+#include "sf_ctsu_comm.h"
 
 #include "../../../../r_ctsu_v2/src/driver/r_ctsu/r_ctsu_private.h"
 #include "../../../../r_touch_v2/src/driver/r_touch/r_touch_private.h"
@@ -700,7 +700,7 @@ typedef struct
 {
              uint16_t    *ctsuso;                    /* Tuning ctsuso value                                           */
     volatile uint8_t     *result;                    /* Tuning completion flag                                        */
-} touch_tuning_t;
+} touch_comm_t;
 
 /*=====    Calibration information    ================================================================================*/
 typedef struct
@@ -805,7 +805,7 @@ const uint8_t g_matrix_index[] = {
 touch_func_flag_t       g_touch_function[METHOD_NUM];
 touch_func_param_t      g_touch_paramter[METHOD_NUM];
 key_info_t              g_key_info[METHOD_NUM];
-//touch_tuning_t          g_touch_tuning_info[METHOD_NUM];
+//touch_comm_t          g_touch_comm_info[METHOD_NUM];
 //calib_info_t            g_calib_info[METHOD_NUM];
 //key_user_param_t        g_key_user_parameter[METHOD_NUM];
 touch_group_param_t     g_touch_key_group[METHOD_NUM];
@@ -895,7 +895,7 @@ touch_sensor_t g_sensors[METHOD_NUM][(MAX_MUTUAL_SENSOR_ID > SELFCAP_SENSOR_MAX)
 
 int SerialCommandInitialTouch(touch_instance_t * p_touch, const uint8_t itr)
 {
-#if (SF_CTSU_TUNING_CFG_PARAM_CHECK==true)
+#if (SF_CTSU_COMM_CFG_PARAM_CHECK==true)
     ASSERT(itr < METHOD_NUM);
     ASSERT(p_touch != NULL);
     ASSERT(p_touch->p_cfg != NULL);
@@ -927,7 +927,7 @@ int SerialCommandInitialTouch(touch_instance_t * p_touch, const uint8_t itr)
 
 int SerialCommandInitial(ctsu_instance_t * p_ctsu, const uint8_t itr)
 {
-#if (SF_CTSU_TUNING_CFG_PARAM_CHECK==true)
+#if (SF_CTSU_COMM_CFG_PARAM_CHECK==true)
     ASSERT(itr < METHOD_NUM);
     ASSERT(p_ctsu!=NULL);
     ASSERT(p_ctsu->p_cfg != NULL);
@@ -1185,7 +1185,7 @@ uint8_t    GetReplayMessage(uint8_t * value, uint16_t * length)
 ***********************************************************************************************************************/
 static uint8_t GetMeasureSensorCounter(uint16_t channel, uint16_t * value)
 {
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_TUNING)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_COMM)
     uint8_t result;
     uint8_t index;
 
@@ -1198,8 +1198,8 @@ static uint8_t GetMeasureSensorCounter(uint16_t channel, uint16_t * value)
             index = g_key_info[g_access_method].sensor_index[channel];
             if ( index != 0xff)
             {
-                ctsu_channel_data_self_t* result = (ctsu_channel_data_self_t*)all_ctsu_configs[g_access_method]->p_sensor_data;
-                *value = result[index].sen_cnt;
+                ctsu_channel_data_self_t* presult = (ctsu_channel_data_self_t*)all_ctsu_configs[g_access_method]->p_sensor_data;
+                *value = presult[index].sen_cnt;
             }
         }
         else
@@ -1207,15 +1207,15 @@ static uint8_t GetMeasureSensorCounter(uint16_t channel, uint16_t * value)
             index = g_key_info[g_access_method].sensor_index[channel];
             if (g_key_info[g_access_method].sensor_index[channel] != 0xff)
             {
-                ctsu_channel_data_mutual_t* result = (ctsu_channel_data_mutual_t*)all_ctsu_configs[g_access_method]->p_sensor_data;
-                *value = (result[index].sen_cnt_2 - result[index].sen_cnt_1);
+                ctsu_channel_data_mutual_t* presult = (ctsu_channel_data_mutual_t*)all_ctsu_configs[g_access_method]->p_sensor_data;
+                *value = (uint16_t)(presult[index].sen_cnt_2 - presult[index].sen_cnt_1);
             }
         }
         result = CMD_RESULT_SUCCESS;
     }
 #endif
 
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     uint8_t result;
 
     touch_err_t touch_err;
@@ -1256,7 +1256,7 @@ static uint8_t GetMeasureSensorCounter(uint16_t channel, uint16_t * value)
 ***********************************************************************************************************************/
 static uint8_t GetMeasureReferenceValue(uint16_t channel, uint16_t * value)
 {
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_TUNING)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_COMM)
     uint8_t result;
     uint8_t index;
     (void)index;
@@ -1285,7 +1285,7 @@ static uint8_t GetMeasureReferenceValue(uint16_t channel, uint16_t * value)
                 ctsu_channel_data_mutual_t* filtered_values = (ctsu_channel_data_mutual_t*)all_ctsu_configs[g_access_method]->p_sensor_data;
                 if(filtered_values!=NULL)
                 {
-                    *value = filtered_values[index].ref_cnt_2 - filtered_values[index].ref_cnt_1;
+                    *value = (uint16_t)(filtered_values[index].ref_cnt_2 - filtered_values[index].ref_cnt_1);
                     result = CMD_RESULT_SUCCESS;
                 }
 
@@ -1297,7 +1297,7 @@ static uint8_t GetMeasureReferenceValue(uint16_t channel, uint16_t * value)
     ASSERT(result!=CMD_RESULT_FAILURE);
 #endif
 
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     uint8_t result;
     touch_err_t touch_err;
     touch_read_t read_arg =
@@ -1445,18 +1445,20 @@ static uint8_t GetMeasureWheelPosition(uint16_t channel, uint16_t * value)
 ***********************************************************************************************************************/
 static uint8_t GetMeasureTouchResult(uint16_t channel, uint16_t * value)
 {
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_TUNING)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_COMM)
     uint8_t result;
-    uint8_t ch_num, index;
-    (void) index;           //Compiler warning disable
-    (void) ch_num;          //Compiler warning disable
+    uint8_t ch_num;
+    uint8_t index;
+    SSP_PARAMETER_NOT_USED(channel);           //Compiler warning disable
+    SSP_PARAMETER_NOT_USED(index);           //Compiler warning disable
+    SSP_PARAMETER_NOT_USED(ch_num);          //Compiler warning disable
     *value = 0;
     result = CMD_RESULT_SUCCESS;
     ASSERT(result!=CMD_RESULT_FAILURE);
     return result;
 #endif
 
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     uint8_t result;
     uint8_t index;
     uint32_t itr = 0;
@@ -1647,7 +1649,8 @@ static uint8_t GetMeasureSecondaryReferenceCounter(uint16_t channel, uint16_t * 
 static uint8_t GetParameterTouchFuncMode(uint16_t * value)
 {
     uint8_t result = CMD_RESULT_FAILURE;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    SSP_PARAMETER_NOT_USED(value);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     *value = (uint16_t)(((g_touch_function[g_access_method].flag.drift & 0x01) << 0) +
                         ((g_touch_function[g_access_method].flag.msa   & 0x01) << 1) +
                         ((g_touch_function[g_access_method].flag.acd0  & 0x01) << 2) +
@@ -1672,7 +1675,8 @@ static uint8_t SetParameterTouchFuncMode(uint16_t value)
 {
     /* Drift correction      */
     uint8_t result = CMD_RESULT_FAILURE;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    SSP_PARAMETER_NOT_USED(value);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     g_touch_function[g_access_method].flag.drift = (uint8_t)((value >> 0) & 0x01); /* Drift correction      */
     g_touch_function[g_access_method].flag.msa   = (uint8_t)((value >> 1) & 0x01); /* - */
     g_touch_function[g_access_method].flag.acd0  = (uint8_t)((value >> 2) & 0x01); /* - */
@@ -1694,7 +1698,8 @@ static uint8_t SetParameterTouchFuncMode(uint16_t value)
 static uint8_t GetParameterDriftInterval(uint16_t * value)
 {
     uint8_t result = CMD_RESULT_FAILURE;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    SSP_PARAMETER_NOT_USED(value);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     *value = g_touch_paramter[g_access_method].drift_freq = all_touch_configs[g_access_method]->p_sensor[0].drift_rate;
     result = CMD_RESULT_SUCCESS;
 #endif
@@ -1712,7 +1717,8 @@ static uint8_t GetParameterDriftInterval(uint16_t * value)
 static uint8_t SetParameterDriftInterval(uint16_t value)
 {
     uint8_t result = CMD_RESULT_FAILURE;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    SSP_PARAMETER_NOT_USED(value);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     uint16_t sensor_count = 0;
     ctsu_err_t ctsu_err;
     SSP_PARAMETER_NOT_USED(ctsu_err);
@@ -1749,7 +1755,8 @@ static uint8_t SetParameterDriftInterval(uint16_t value)
 static uint8_t GetParameterMsa(uint16_t * value)
 {
     uint8_t result = CMD_RESULT_FAILURE;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    SSP_PARAMETER_NOT_USED(value);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     *value = g_touch_paramter[g_access_method].msa_freq = all_touch_configs[g_access_method]->p_common->on_limit;
     result = CMD_RESULT_SUCCESS;
 #endif
@@ -1767,7 +1774,8 @@ static uint8_t GetParameterMsa(uint16_t * value)
 static uint8_t SetParameterMsa(uint16_t value)
 {
     uint8_t result = CMD_RESULT_FAILURE;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    SSP_PARAMETER_NOT_USED(value);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     memcpy((void*)&all_touch_configs[g_access_method]->p_common->on_limit, &value, sizeof(uint16_t));
     g_touch_paramter[g_access_method].msa_freq = value;
     result = CMD_RESULT_SUCCESS;
@@ -1786,7 +1794,8 @@ static uint8_t SetParameterMsa(uint16_t value)
 static uint8_t GetParameterAcdToTouch(uint16_t * value)
 {
     uint8_t result = CMD_RESULT_FAILURE;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    SSP_PARAMETER_NOT_USED(value);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     *value = g_touch_paramter[g_access_method].touch_freq = all_touch_configs[g_access_method]->p_sensor[0].dt_limit;
     result = CMD_RESULT_SUCCESS;
 #endif
@@ -1804,7 +1813,8 @@ static uint8_t GetParameterAcdToTouch(uint16_t * value)
 static uint8_t SetParameterAcdToTouch(uint16_t value)
 {
     uint8_t result = CMD_RESULT_FAILURE;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    SSP_PARAMETER_NOT_USED(value);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     uint16_t sensor_count = 0;
     ctsu_err_t ctsu_err;
     SSP_PARAMETER_NOT_USED(ctsu_err);
@@ -1841,7 +1851,8 @@ static uint8_t SetParameterAcdToTouch(uint16_t value)
 static uint8_t GetParameterAcdToNoTouch(uint16_t * value)
 {
     uint8_t result = CMD_RESULT_FAILURE;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    SSP_PARAMETER_NOT_USED(value);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     *value = g_touch_paramter[g_access_method].not_touch_freq = all_touch_configs[g_access_method]->p_sensor[0].dr_limit;
     result = CMD_RESULT_SUCCESS;
 #endif
@@ -1859,7 +1870,8 @@ static uint8_t GetParameterAcdToNoTouch(uint16_t * value)
 static uint8_t SetParameterAcdToNoTouch(uint16_t value)
 {
     uint8_t result = CMD_RESULT_FAILURE;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+    SSP_PARAMETER_NOT_USED(value);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     uint16_t sensor_count = 0;
     ctsu_err_t ctsu_err;
     SSP_PARAMETER_NOT_USED(ctsu_err);
@@ -1903,7 +1915,7 @@ static uint8_t GetParameterThreshold(uint16_t channel, uint16_t * value)
     result = CMD_RESULT_FAILURE;
     if (channel < g_method_info[g_access_method].enable)
     {
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
         index = g_key_info[g_access_method].sensor_index[channel];
         if (0xff != index)
         {
@@ -1929,11 +1941,12 @@ static uint8_t SetParameterThreshold(uint16_t channel, uint16_t value)
 {
     uint8_t result;
     uint8_t index;
-    (void) index;           //Compiler warning disable
+    SSP_PARAMETER_NOT_USED(index);           //Compiler warning disable
+    SSP_PARAMETER_NOT_USED(value);
     result = CMD_RESULT_FAILURE;
     if (channel < g_method_info[g_access_method].enable)
     {
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
         index = g_key_info[g_access_method].sensor_index[channel];
         if (0xff != index)
         {
@@ -1962,7 +1975,7 @@ static uint8_t GetParameterHysteresis(uint16_t channel, uint16_t * value)
     result = CMD_RESULT_FAILURE;
     if (channel < g_method_info[g_access_method].enable)
     {
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
         uint8_t index = g_key_info[g_access_method].sensor_index[channel];
         if (0xff != index)
         {
@@ -1988,9 +2001,10 @@ static uint8_t SetParameterHysteresis(uint16_t channel, uint16_t value)
 {
     uint8_t result;
     result = CMD_RESULT_FAILURE;
+    SSP_PARAMETER_NOT_USED(value);
     if (channel < g_method_info[g_access_method].enable)
     {
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
         uint8_t index = g_key_info[g_access_method].sensor_index[channel];
         if (0xff != index)
         {
@@ -4287,7 +4301,7 @@ static void SensorUtilityWriteResponse(com_data_tx_t *pcmd, uint16_t channel)
     uint8_t i;
     uint8_t status;
     ctsu_err_t err;
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_TUNING)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_COMM)
     ctsu_control_arg_t control_arg;
 #endif
     status = CMD_RESULT_FAILURE;
@@ -4325,7 +4339,7 @@ static void SensorUtilityWriteResponse(com_data_tx_t *pcmd, uint16_t channel)
         case 0x03:    // EXEC_BATCH (Read only)
             break;
         case 0x04:    // MEASURE
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_TUNING)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_COMM)
             if (0 != com_data.fmt.data[0])
             {
                 /* Measurement Re-start */

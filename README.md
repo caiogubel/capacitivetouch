@@ -25,7 +25,7 @@ and must be completed prior to evaluating further sections.
 - [Synergy Software Package v1.3.0+](https://synergygallery.renesas.com)
 - [Renesas.r_ctsu_v2.1.3.0.pack](./deploy/Renesas.r_ctsu_v2.1.3.0.pack)
 - [Renesas.r_touch_v2.1.3.0.pack](./deploy/Renesas.r_touch_v2.1.3.0.pack)
-- [Renesas.sf_ctsu_tuning.1.3.0.pack](./deploy/Renesas.sf_ctsu_tuning.1.3.0.pack)
+- [Renesas.sf_ctsu_comm.1.3.0.pack](./deploy/Renesas.sf_ctsu_comm.1.3.0.pack)
 
 # DK-S124 #
 The S124 Development Kit (DK-S124) allows users to evaluate the Synergy S124 Microcontroller and enables them to develop their own applications. One of the features
@@ -353,47 +353,47 @@ void touch_callback(touch_callback_arg_t * p_arg)
 Chapter 2
 ==========
 Once a TOUCH detection interface/middleware is operational, a user may want to visually observe the operation to understand 
-what capacitance measurement data is being generated in the given environment. The Renesas.sf_ctsu_tuning.1.3.0.pack file facilitates this 
-capability. It allows a user to connect to a PC based Monitoring and Tuning tool called Workbench6. To maintain consistency, with the previous chapter this example adds the stack
+what capacitance measurement data is being generated in the given environment. The Renesas.sf_ctsu_comm.1.3.0.pack file facilitates this 
+capability. It allows a user to connect to a PC based Monitoring and Tuning tool like Workbench6. To maintain consistency, with the previous chapter this example adds the stack
 to the HAL/Common Thread. To be able to communicate with the PC; a user must configure a communication interface. This can be done by either using the **Communication Framework** or 
-the **SCI UART HAL Drivers** available with the SSP. Once the stacks for the communication interface are configured and tested to be functional, you may configure the Tuning Framework to utilize the interface.
+the **SCI UART HAL Drivers** available with the SSP. Once the stacks for the communication interface are configured and tested to be functional, you may configure the CTSU Communication Framework to utilize the interface.
 
-## Configuring the Tuning Framework ##
+## Configuring the CTSU Communication Framework ##
 
 The following steps must be performed to allow connectivity to the host PC running the tool:
 
 - Copy the pack file to the e2studio installation folder. The default path is `C:\Renesas\e2_studio\internal\projectgen\arm\Packs`.
 - Open an existing project with a functional Capacitive TOUCH detection interface.
-- Add the **CTSU Tuning Framework on sf_ctsu_tuning** stack to a New Thread or the HAL/Common stack. 
+- Add the **CTSU Communication Framework on sf_ctsu_comm** stack to a New Thread or the HAL/Common stack. 
 - Provide the CTSU and TOUCH Middle-ware the Framework will be monitoring. **Note that currently monitoring only one CTSU/TOUCH interface is supported.**
-- Provide the Symbolic name of the Communication Stack to the Tuning Framework. 
+- Provide the Symbolic name of the Communication Stack to the CTSU Communication Framework. 
 
-The following figure shows an example of using a USB Communications Framework with the Tuning Framework. It is important to observe that the names must match as highlighted and the PC connection interface specifies
+The following figure shows an example of using a USB Communications Framework with the CTSU Communication Framework. It is important to observe that the names must match as highlighted and the PC connection interface specifies
 the intent to use Communication Frameworks.
 
-![USB Communications Framework used with the Tuning Framework](./images/TuningStackUSB.PNG)
+![USB Communications Framework used with the CTSU Communication Framework](./images/TuningStackUSB.PNG)
 
-The following figure shows an example of using a Serial Communication driver with the Tuning Framework. Again, it is important to observe that the names must match as highlighted and the PC connection interface specifies
+The following figure shows an example of using a Serial Communication driver with the CTSU Communication Framework. Again, it is important to observe that the names must match as highlighted and the PC connection interface specifies
 the intent to use a HAL Driver.
 
-![SCI UART HAL used with the Tuning Framework](./images/TuningStackSCI.PNG)
+![SCI UART HAL used with the CTSU Communication Framework](./images/TuningStackSCI.PNG)
 
-## Operating the Tuning Framework ## 
+## Operating the CTSU Communication Framework ## 
 
-Once the Tuning Framework is properly configured:
+Once the CTSU Communication Framework is properly configured:
 
-- Call the open function once to perform initialization. Note, **the Tuning Framework will not operate the lower layers in Monitor mode**.
+- Call the open function once to perform initialization. Note, **the CTSU Communication Framework will not operate the lower layers in Monitor mode**.
 - Call the run function in a loop to ensure exchange of data with the connected PC.
 
-The following code demonstrates the TOUCH middleware (which also operates the underlying CTSU HAL) operating with the Tuning Framework when using the Communications Frameworks.
+The following code demonstrates the TOUCH middleware (which also operates the underlying CTSU HAL) operating with the CTSU Communication Framework when using the Communications Frameworks.
 
 ```c
 
 {
 
-    g_sf_ctsu_tuning0.p_api->open(g_sf_ctsu_tuning0.p_ctrl, g_sf_ctsu_tuning0.p_cfg);
+    g_sf_ctsu_comm0.p_api->open(g_sf_ctsu_comm0.p_ctrl, g_sf_ctsu_comm0.p_cfg);
 
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
     g_touch0_on_g_ctsu.p_api->open(g_touch0_on_g_ctsu.p_ctrl, g_touch0_on_g_ctsu.p_cfg);
 
     g_touch0_on_g_ctsu.p_api->calibrate(g_touch0_on_g_ctsu.p_ctrl);
@@ -401,8 +401,8 @@ The following code demonstrates the TOUCH middleware (which also operates the un
 
     while (1)
     {
-        g_sf_ctsu_tuning0.p_api->run(g_sf_ctsu_tuning0.p_ctrl);
-#if (SF_CTSU_TUNING_CFG_MODE==SF_CTSU_TUNING_CFG_MODE_MONITOR)
+        g_sf_ctsu_comm0.p_api->run(g_sf_ctsu_comm0.p_ctrl);
+#if (SF_CTSU_COMM_CFG_MODE==SF_CTSU_COMM_CFG_MODE_MONITOR)
         if (g_touch0_on_g_ctsu.p_api->update (g_touch0_on_g_ctsu.p_ctrl) == TOUCH_SUCCESS)
         {
             g_touch0_on_g_ctsu.p_api->scan(g_touch0_on_g_ctsu.p_ctrl);
